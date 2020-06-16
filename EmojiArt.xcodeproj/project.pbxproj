@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		CFD46ABE249979B300DACD8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD46ABD249979B300DACD8E /* AppDelegate.swift */; };
 		CFD46AC0249979B300DACD8E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD46ABF249979B300DACD8E /* SceneDelegate.swift */; };
-		CFD46AC2249979B300DACD8E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD46AC1249979B300DACD8E /* ContentView.swift */; };
+		CFD46AC2249979B300DACD8E /* EmojiArtDocumentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD46AC1249979B300DACD8E /* EmojiArtDocumentView.swift */; };
 		CFD46AC4249979B600DACD8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFD46AC3249979B600DACD8E /* Assets.xcassets */; };
 		CFD46AC7249979B600DACD8E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFD46AC6249979B600DACD8E /* Preview Assets.xcassets */; };
 		CFD46ACA249979B600DACD8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFD46AC8249979B600DACD8E /* LaunchScreen.storyboard */; };
@@ -20,7 +20,7 @@
 		CFD46ABA249979B300DACD8E /* EmojiArt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmojiArt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFD46ABD249979B300DACD8E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CFD46ABF249979B300DACD8E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CFD46AC1249979B300DACD8E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CFD46AC1249979B300DACD8E /* EmojiArtDocumentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtDocumentView.swift; sourceTree = "<group>"; };
 		CFD46AC3249979B600DACD8E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CFD46AC6249979B600DACD8E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CFD46AC9249979B600DACD8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -60,7 +60,7 @@
 			children = (
 				CFD46ABD249979B300DACD8E /* AppDelegate.swift */,
 				CFD46ABF249979B300DACD8E /* SceneDelegate.swift */,
-				CFD46AC1249979B300DACD8E /* ContentView.swift */,
+				CFD46AC1249979B300DACD8E /* EmojiArtDocumentView.swift */,
 				CFD46AD124997ADA00DACD8E /* EmojiArtDocument.swift */,
 				CFD46AC3249979B600DACD8E /* Assets.xcassets */,
 				CFD46AC8249979B600DACD8E /* LaunchScreen.storyboard */,
@@ -151,7 +151,7 @@
 			files = (
 				CFD46ABE249979B300DACD8E /* AppDelegate.swift in Sources */,
 				CFD46AC0249979B300DACD8E /* SceneDelegate.swift in Sources */,
-				CFD46AC2249979B300DACD8E /* ContentView.swift in Sources */,
+				CFD46AC2249979B300DACD8E /* EmojiArtDocumentView.swift in Sources */,
 				CFD46AD224997ADA00DACD8E /* EmojiArtDocument.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
