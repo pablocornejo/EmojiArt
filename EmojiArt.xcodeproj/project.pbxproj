@@ -15,6 +15,7 @@
 		CFD46ACA249979B600DACD8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFD46AC8249979B600DACD8E /* LaunchScreen.storyboard */; };
 		CFD46AD224997ADA00DACD8E /* EmojiArtDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD46AD124997ADA00DACD8E /* EmojiArtDocument.swift */; };
 		CFD46AD42499923B00DACD8E /* EmojiArt.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD46AD32499923B00DACD8E /* EmojiArt.swift */; };
+		CFD46AD6249997A100DACD8E /* EmojiArtExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD46AD5249997A000DACD8E /* EmojiArtExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		CFD46ACB249979B600DACD8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CFD46AD124997ADA00DACD8E /* EmojiArtDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtDocument.swift; sourceTree = "<group>"; };
 		CFD46AD32499923B00DACD8E /* EmojiArt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArt.swift; sourceTree = "<group>"; };
+		CFD46AD5249997A000DACD8E /* EmojiArtExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiArtExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				CFD46AC1249979B300DACD8E /* EmojiArtDocumentView.swift */,
 				CFD46AD124997ADA00DACD8E /* EmojiArtDocument.swift */,
 				CFD46AD32499923B00DACD8E /* EmojiArt.swift */,
+				CFD46AD5249997A000DACD8E /* EmojiArtExtensions.swift */,
 				CFD46AC3249979B600DACD8E /* Assets.xcassets */,
 				CFD46AC8249979B600DACD8E /* LaunchScreen.storyboard */,
 				CFD46ACB249979B600DACD8E /* Info.plist */,
@@ -154,6 +157,7 @@
 			files = (
 				CFD46ABE249979B300DACD8E /* AppDelegate.swift in Sources */,
 				CFD46AC0249979B300DACD8E /* SceneDelegate.swift in Sources */,
+				CFD46AD6249997A100DACD8E /* EmojiArtExtensions.swift in Sources */,
 				CFD46AD42499923B00DACD8E /* EmojiArt.swift in Sources */,
 				CFD46AC2249979B300DACD8E /* EmojiArtDocumentView.swift in Sources */,
 				CFD46AD224997ADA00DACD8E /* EmojiArtDocument.swift in Sources */,
