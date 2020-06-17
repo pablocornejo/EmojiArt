@@ -23,9 +23,25 @@ struct EmojiArtDocumentView: View {
             }
             .padding(.horizontal)
             
-            Rectangle()
-                .foregroundColor(.yellow)
+            Color.white
+                .overlay(
+                    Group {
+                        if document.backgroundImage != nil {
+                            Image(uiImage: document.backgroundImage!)
+                        }
+                    }
+                )
                 .edgesIgnoringSafeArea([.horizontal, .bottom])
+                .onDrop(of: ["public.image"], isTargeted: nil) { providers, location in
+                    self.drop(providers: providers)
+            }
+        }
+    }
+    
+    private func drop(providers: [NSItemProvider]) -> Bool {
+        providers.loadFirstObject(ofType: URL.self) { url in
+            print("dropped: \(url)")
+            self.document.setBackgroundURL(url)
         }
     }
     
