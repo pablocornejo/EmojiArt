@@ -16,6 +16,8 @@ class EmojiArtDocument: ObservableObject {
     @Published private var emojiArt: EmojiArt = EmojiArt()
     @Published private(set) var backgroundImage: UIImage?
     
+    var emojis: [EmojiArt.Emoji] { emojiArt.emojis }
+    
     // MARK: - Intents
     
     func addEmoji(_ emoji: String, at location: CGPoint, size: CGFloat) {
@@ -54,4 +56,10 @@ class EmojiArtDocument: ObservableObject {
             }
         }
     }
+}
+
+// This is legal as it is extending the model in the *view model* file, not part of the model itself.
+extension EmojiArt.Emoji {
+    var fontSize: CGFloat { CGFloat(size) }
+    var location: CGPoint { CGPoint(x: x, y: y) }
 }
