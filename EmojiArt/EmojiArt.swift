@@ -28,6 +28,17 @@ struct EmojiArt: Codable {
         }
     }
     
+    var json: Data? {
+        try? JSONEncoder().encode(self)
+    }
+    
+    init?(json: Data?) {
+        guard let json = json, let newEmojiArt = try? JSONDecoder().decode(EmojiArt.self, from: json) else { return nil }
+        self = newEmojiArt
+    }
+    
+    init() { }
+    
     private var uniqueEmojiID = 0
     
     mutating func addEmoji(_ text: String, x: Int, y: Int, size: Int) {
