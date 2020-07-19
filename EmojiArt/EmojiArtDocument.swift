@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Combine
 
 
 /// The emoji art document view model.
@@ -14,20 +15,18 @@ class EmojiArtDocument: ObservableObject {
     static let palette: String = "🍄🌜⚡️💥🌏"
     
     // @Published // workaround for property observer problem with property wrappers
-    private var emojiArt: EmojiArt = EmojiArt() {
-        willSet {
-            objectWillChange.send()
-        }
-        didSet {
-            UserDefaults.standard.set(emojiArt.json, forKey: EmojiArtDocument.untitled)
-        }
-    }
+    @Published private var emojiArt: EmojiArt = EmojiArt()
     @Published private(set) var backgroundImage: UIImage?
     
     private static let untitled = "EmojiArtDocument.Untitled"
     
+    private var autosaveCancellable: AnyCancellable?
+    
     init() {
         emojiArt = EmojiArt(json: UserDefaults.standard.data(forKey: EmojiArtDocument.untitled)) ?? EmojiArt()
+        autosaveCancellable = $emojiArt.sink { emojiArt in
+            UserDefaults.standard.set(emojiArt.json, forKey: EmojiArtDocument.untitled)
+        }
         fetchBackgroundImageData()
     }
     
