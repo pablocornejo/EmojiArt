@@ -16,7 +16,7 @@ class EmojiArtDocument: ObservableObject {
     
     // @Published // workaround for property observer problem with property wrappers
     @Published private var emojiArt: EmojiArt = EmojiArt()
-    @Published private(set) var backgroundImage: UIImage?
+    @Published private(set) var backgroundImage: UIImage? // Publisher objecct can be accessed with $backgroundImage
     
     private static let untitled = "EmojiArtDocument.Untitled"
     
@@ -24,7 +24,7 @@ class EmojiArtDocument: ObservableObject {
     
     init() {
         emojiArt = EmojiArt(json: UserDefaults.standard.data(forKey: EmojiArtDocument.untitled)) ?? EmojiArt()
-        autosaveCancellable = $emojiArt.sink { emojiArt in
+        autosaveCancellable = $emojiArt.sink { emojiArt in  // $emojiArt accesses the property wrapper's Publisher object
             UserDefaults.standard.set(emojiArt.json, forKey: EmojiArtDocument.untitled)
         }
         fetchBackgroundImageData()
