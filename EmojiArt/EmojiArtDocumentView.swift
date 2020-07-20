@@ -13,6 +13,8 @@ struct EmojiArtDocumentView: View {
     @State private var steadyStateZoomScale: CGFloat = 1.0
     @GestureState private var gestureZoomScale: CGFloat = 1.0 // can be any type that represents the data that will change with the gesture
     
+    @State private var chosenPalette: String = ""
+    
     private var zoomScale: CGFloat {
         steadyStateZoomScale * gestureZoomScale
     }
@@ -31,16 +33,17 @@ struct EmojiArtDocumentView: View {
     var body: some View {
         VStack {
             HStack {
-                PaletteChooser()
+                PaletteChooser(document: document, chosenPalette: $chosenPalette)
                 ScrollView(.horizontal) { 
                     HStack {
-                        ForEach(EmojiArtDocument.palette.map { String($0) }, id: \.self) { emoji in
+                        ForEach(chosenPalette.map(String.init), id: \.self) { emoji in
                             Text(emoji)
                                 .font(.system(size: self.defaultEmojiSize))
                                 .onDrag { NSItemProvider(object: emoji as NSString) }
                         }
                     }
                 }
+                .onAppear { self.chosenPalette = self.document.defaultPalette }
             }
             
             GeometryReader { geometry in
