@@ -13,7 +13,12 @@ struct EmojiArtDocumentView: View {
     @State private var steadyStateZoomScale: CGFloat = 1.0
     @GestureState private var gestureZoomScale: CGFloat = 1.0 // can be any type that represents the data that will change with the gesture
     
-    @State private var chosenPalette: String = ""
+    @State private var chosenPalette: String
+    
+    init(document: EmojiArtDocument) {
+        self.document = document
+        _chosenPalette = State(wrappedValue: document.defaultPalette)
+    }
     
     private var zoomScale: CGFloat {
         steadyStateZoomScale * gestureZoomScale
@@ -43,7 +48,6 @@ struct EmojiArtDocumentView: View {
                         }
                     }
                 }
-                .onAppear { self.chosenPalette = self.document.defaultPalette }
             }
             
             GeometryReader { geometry in
