@@ -11,15 +11,69 @@ import SwiftUI
 struct PaletteChooser: View {
     @ObservedObject var document: EmojiArtDocument
     @Binding var chosenPalette: String
+    @State private var showPaletteEditor: Bool = false
     
     var body: some View {
         HStack {
             Stepper(onIncrement: { self.chosenPalette = self.document.palette(after: self.chosenPalette) },
                     onDecrement: { self.chosenPalette = self.document.palette(before: self.chosenPalette) },
                     label: { EmptyView() })
+            
             Text(document.paletteNames[chosenPalette] ?? "")
+            
+            Image(systemName: "keyboard").imageScale(.large)
+                .onTapGesture { self.showPaletteEditor = true }
+                .popover(isPresented: $showPaletteEditor) {
+                    PaletteEditor(chosenPalette: self.$chosenPalette)
+                        .environmentObject(self.document)
+                        .frame(minWidth: 300, minHeight: 500)
+                }
         }
         .fixedSize(horizontal: true, vertical: false)   // To use only space offered to the view and not stretch to occupy any extra space.
+    }
+}
+
+struct PaletteEditor: View {
+    @EnvironmentObject var document: EmojiArtDocument
+    @Binding var chosenPalette: String
+    @State private var paletteName: String = ""
+    @State private var emojisToAdd: String = ""
+    
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            Text("Palette Editor").font(.headline).padding()
+            
+            Divider()
+            
+            Form {
+                Section {
+                    TextField("Palette Name", text: $paletteName, onEditingChanged: { began in
+                        if !began {
+                            self.document.renamePalette(self.chosenPalette, to: self.chosenPalette)
+                        }
+                    })
+                    TextField("Add Emoji", text: $emojisToAdd, onEditingChanged: { began in
+                        if !began {
+                            self.chosenPalette = self.document.addEmoji(self.emojisToAdd, toPalette: self.chosenPalette)
+                            self.emojisToAdd = ""
+                        }
+                    })
+                }
+                
+                Section(header: Text("Remove Emoji")) {
+                    ForEach(chosenPalette.map(String.init), id: \.self) { emoji in
+                        Text(emoji)
+                            .onTapGesture {
+                                self.chosenPalette = self.document.removeEmoji(emoji, fromPalette: self.chosenPalette)
+                            }
+                    }
+                }
+            }
+        }
+        .onAppear {
+            self.paletteName = self.document.paletteNames[self.chosenPalette] ?? ""
+        }
     }
 }
 
