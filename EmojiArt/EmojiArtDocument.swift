@@ -20,15 +20,15 @@ class EmojiArtDocument: ObservableObject, Identifiable {
     @Published private var emojiArt: EmojiArt = EmojiArt()
     @Published private(set) var backgroundImage: UIImage? // Publisher objecct can be accessed with $backgroundImage
     
-    private static let untitled = "EmojiArtDocument.Untitled"
-    
     private var autosaveCancellable: AnyCancellable?
     private var fetchImageCancellable: AnyCancellable?
     
-    init() {
-        emojiArt = EmojiArt(json: UserDefaults.standard.data(forKey: EmojiArtDocument.untitled)) ?? EmojiArt()
+    init(id: UUID? = nil) {
+        self.id = id ?? UUID()  // An example of a techniue to avoid exposing the default value.
+        let defaultsKey = "EmojiArtDocument.\(self.id.uuidString)"
+        emojiArt = EmojiArt(json: UserDefaults.standard.data(forKey: defaultsKey)) ?? EmojiArt()
         autosaveCancellable = $emojiArt.sink { emojiArt in  // $emojiArt accesses the property wrapper's Publisher object
-            UserDefaults.standard.set(emojiArt.json, forKey: EmojiArtDocument.untitled)
+            UserDefaults.standard.set(emojiArt.json, forKey: defaultsKey)
         }
         fetchBackgroundImageData()
     }
