@@ -11,7 +11,9 @@ import Combine
 
 
 /// The emoji art document view model.
-class EmojiArtDocument: ObservableObject {
+class EmojiArtDocument: ObservableObject, Identifiable {
+    let id: UUID
+    
     static let palette: String = "🍄🌜⚡️💥🌏"
     
     // @Published // workaround for property observer problem with property wrappers
@@ -74,6 +76,16 @@ class EmojiArtDocument: ObservableObject {
                 .replaceError(with: nil)
                 .assign(to: \.backgroundImage, on: self) // Assign only works with `Never` as failure type
         }
+    }
+}
+
+extension EmojiArtDocument: Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static func == (lhs: EmojiArtDocument, rhs: EmojiArtDocument) -> Bool {
+        lhs.id == rhs.id
     }
 }
 
