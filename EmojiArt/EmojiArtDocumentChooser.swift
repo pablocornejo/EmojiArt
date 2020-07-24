@@ -19,13 +19,19 @@ struct EmojiArtDocumentChooser: View {
                         Text(self.store.name(for: document))
                     }
                 }
+                .onDelete { indexSet in
+                    indexSet
+                        .map { self.store.documents[$0] }
+                        .forEach(self.store.removeDocument)
+                }
             }
             .navigationBarTitle(store.name )
-            .navigationBarItems(leading: Button(action: {
-                self.store.addDocument()
-            }) {
-                Image(systemName: "plus").imageScale(.large)
-            })
+            .navigationBarItems(
+                leading: Button(action: { self.store.addDocument() }) {
+                    Image(systemName: "plus").imageScale(.large)
+                },
+                trailing: EditButton()
+            )
         }
     }
 }
