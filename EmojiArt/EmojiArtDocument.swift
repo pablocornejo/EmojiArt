@@ -19,6 +19,8 @@ class EmojiArtDocument: ObservableObject, Identifiable {
     // @Published // workaround for property observer problem with property wrappers
     @Published private var emojiArt: EmojiArt = EmojiArt()
     @Published private(set) var backgroundImage: UIImage? // Publisher objecct can be accessed with $backgroundImage
+    @Published var steadyStatePanOffset: CGSize = .zero
+    @Published var steadyStateZoomScale: CGFloat = 1.0
     
     private var autosaveCancellable: AnyCancellable?
     private var fetchImageCancellable: AnyCancellable?

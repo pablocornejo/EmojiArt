@@ -10,10 +10,11 @@ import SwiftUI
 
 struct EmojiArtDocumentView: View {
     @ObservedObject var document: EmojiArtDocument
-    @State private var steadyStateZoomScale: CGFloat = 1.0
     @GestureState private var gestureZoomScale: CGFloat = 1.0 // can be any type that represents the data that will change with the gesture
     
     @State private var chosenPalette: String
+    @State private var explainBackgroundPaste: Bool = false
+    @State private var confirmBackgroundPaste: Bool = false
     
     init(document: EmojiArtDocument) {
         self.document = document
@@ -21,18 +22,17 @@ struct EmojiArtDocumentView: View {
     }
     
     private var zoomScale: CGFloat {
-        steadyStateZoomScale * gestureZoomScale
+        document.steadyStateZoomScale * gestureZoomScale
     }
     
     private var isLoading: Bool {
         document.backgroundURL != nil && document.backgroundImage == nil
     }
     
-    @State private var steadyStatePanOffset: CGSize = .zero
     @GestureState private var gesturePanOffset: CGSize = .zero
     
     private var panOffset: CGSize {
-        (steadyStatePanOffset + gesturePanOffset) * zoomScale
+        (document.steadyStatePanOffset + gesturePanOffset) * zoomScale
     }
     
     var body: some View {
@@ -111,7 +111,7 @@ struct EmojiArtDocumentView: View {
             .updating($gestureZoomScale) { latestGestureScale, gestureZoomScale, transaction in
                 gestureZoomScale = latestGestureScale
             }
-            .onEnded { self.steadyStateZoomScale *= $0 }
+        .onEnded { self.document.steadyStateZoomScale *= $0 }
     }
     
     private func panGesture() -> some Gesture {
@@ -120,7 +120,7 @@ struct EmojiArtDocumentView: View {
                 gesturePanOffset = latestDragGestureValue.translation / self.zoomScale
         }
         .onEnded {
-            self.steadyStatePanOffset = self.steadyStatePanOffset + $0.translation / self.zoomScale
+            self.document.steadyStatePanOffset = self.document.steadyStatePanOffset + $0.translation / self.zoomScale
         }
     }
     
@@ -128,8 +128,8 @@ struct EmojiArtDocumentView: View {
         if let image = image, image.size.width > 0, image.size.height > 0, size.height > 0, size.width > 0 {
             let hZoom = size.width / image.size.width
             let vZoom = size.height / image.size.height
-            self.steadyStateZoomScale = .zero
-            self.steadyStateZoomScale = min(hZoom, vZoom)
+            self.document.steadyStateZoomScale = .zero
+            self.document.steadyStateZoomScale = min(hZoom, vZoom)
         }
     }
     
